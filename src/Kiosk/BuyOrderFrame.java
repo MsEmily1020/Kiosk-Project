@@ -9,7 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class BuyOrderFrame extends CommonFrame {
-	int orderCnt;
+	static int orderCnt;
 	public BuyOrderFrame() throws Exception {
 		super(600, 800, "주문창");
 
