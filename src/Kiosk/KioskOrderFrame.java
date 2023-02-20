@@ -66,16 +66,26 @@ public class KioskOrderFrame extends CommonFrame implements ActionListener {
 		}
 
 		this.add(btPn, BorderLayout.NORTH);
-		
+
 		//주문 버튼
 		JPanel orderBtPn = new JPanel(null);
 		orderBtPn.setPreferredSize(new Dimension(this.getWidth(), 70));
 		JButton orderBt = new JButton("주문");
+		JButton beforeBt = new JButton("이전");
+
+		beforeBt.setForeground(Color.white);
+		beforeBt.setBackground(Color.red);
+		beforeBt.setBounds(0, 0, this.getWidth() / 2, 70);
+		orderBtPn.add(beforeBt);
+
 		orderBt.setBackground(Color.DARK_GRAY);
 		orderBt.setForeground(Color.white);
-		orderBt.setBounds(0, 0, this.getWidth(), 70);
+		orderBt.setBounds(300, 0, this.getWidth() / 2, 70);
 		orderBtPn.add(orderBt);
+
 		this.add(orderBtPn, BorderLayout.SOUTH);
+
+		//주문버튼 클릭
 		orderBt.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -97,6 +107,20 @@ public class KioskOrderFrame extends CommonFrame implements ActionListener {
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
+				}
+			}
+		});
+
+		//이전버튼 클릭
+		beforeBt.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int state =	JOptionPane.showConfirmDialog(null, "주문 내용은 모두 삭제됩니다.", "주문을 취소합니다.", JOptionPane.YES_NO_OPTION);
+				if(state == JOptionPane.YES_OPTION) {
+					menu.dispose();
+					updateSQL("DELETE FROM `order` WHERE o_id = ?", LoginFrame.id);
+					dispose();
+					new LoginFrame().setVisible(true);
 				}
 			}
 		});
@@ -124,7 +148,7 @@ public class KioskOrderFrame extends CommonFrame implements ActionListener {
 		this.pack();
 		this.setSize(new Dimension(600, 800));
 	}
-	
+
 	//추가하기
 	@Override
 	public void actionPerformed(ActionEvent e) {
