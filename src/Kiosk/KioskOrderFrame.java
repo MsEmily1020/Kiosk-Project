@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.JobAttributes;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.nio.file.Files;
@@ -11,6 +12,7 @@ import java.nio.file.Paths;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
@@ -27,7 +29,8 @@ public class KioskOrderFrame extends CommonFrame implements ActionListener {
 
 	public KioskOrderFrame() throws Exception {
 		super(600, 800, "주문하기");
-		new AddMenuTool().setVisible(true);
+		AddMenuTool menu = new AddMenuTool();
+		menu.setVisible(true);
 		this.setLayout(new BorderLayout());
 
 		//메뉴 선택
@@ -76,8 +79,25 @@ public class KioskOrderFrame extends CommonFrame implements ActionListener {
 		orderBt.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				menu.setLocationRelativeTo(null);
 				dispose();
-				new BuyOrderFrame().setVisible(true);
+				int yesOrNo = JOptionPane.showConfirmDialog(null, "주문버튼을 클릭하셨습니다.", "이대로 주문하시겠습니까?", JOptionPane.YES_NO_OPTION);
+				if(yesOrNo == JOptionPane.YES_OPTION) {
+					menu.dispose();
+					try {
+						new BuyOrderFrame().setVisible(true);
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+				}
+				else {
+					try {
+						menu.dispose();
+						new KioskOrderFrame().setVisible(true);
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+				}
 			}
 		});
 	}
