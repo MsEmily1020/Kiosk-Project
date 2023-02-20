@@ -127,6 +127,14 @@ public class SelectOrderFrame extends CommonFrame implements ActionListener {
 	//추가하기
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		updateSQL("INSERT INTO q1206.manage (m_id, m_name, m_price, m_cnt) "
+				+ "VALUES (?, ?, ?, ?)",
+				LoginFrame.id,
+				menuName,
+				Integer.parseInt(price),
+				cnt
+				);
+		
 		updateSQL("INSERT INTO q1206.order (o_id, o_user, o_name, o_price, o_cnt) "
 				+ "VALUES (?, ?, ?, ?, ?)",
 				LoginFrame.id,

@@ -56,6 +56,15 @@ public class Setting {
 
 		System.out.println("order DB 생성");
 		
+		stmt.execute("CREATE TABLE `q1206`.`manage` ("
+				+ "m_no INT PRIMARY KEY AUTO_INCREMENT,"
+				+ "m_id VARCHAR(10),"
+				+ "m_name VARCHAR(20),"
+				+ "m_price INT,"
+				+ "m_cnt INT"
+				+ ")");
+		
+		System.out.println("manage DB 생성");
 		CommonFrame.infoMsg("셋팅 성공");
 	}
 }

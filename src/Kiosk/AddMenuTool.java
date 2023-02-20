@@ -30,8 +30,9 @@ public class AddMenuTool extends CommonFrame {
 				if(e.getClickCount() == 2) {
 					int state =	JOptionPane.showConfirmDialog(null, "정말로 삭제 하시겠습니까?", "행을 삭제하기", JOptionPane.YES_NO_OPTION);
 					if(state == JOptionPane.YES_OPTION) {
-						int row = table.getSelectedRow() + 1;
+						int row = table.getSelectedRow();
 						updateSQL("DELETE FROM `order` WHERE o_no = ?", model.getValueAt(row, 4));
+						updateSQL("DELETE FROM `manage` WHERE m_no = ?", model.getValueAt(row, 4));
 						model.removeRow(row);
 						try {
 							createDB();

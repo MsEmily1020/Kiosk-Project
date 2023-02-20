@@ -119,6 +119,7 @@ public class KioskOrderFrame extends CommonFrame implements ActionListener {
 				if(state == JOptionPane.YES_OPTION) {
 					menu.dispose();
 					updateSQL("DELETE FROM `order` WHERE o_id = ?", LoginFrame.id);
+					updateSQL("DELETE FROM `manage` WHERE m_id = ?", LoginFrame.id);
 					dispose();
 					new LoginFrame().setVisible(true);
 				}
