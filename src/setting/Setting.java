@@ -2,7 +2,7 @@ package setting;
 
 import java.sql.DriverManager;
 
-import Kiosk.CommonFrame;
+import controller.CommonFrame;
 
 public class Setting {
 	public static void main(String[] args) {
@@ -48,7 +48,6 @@ public class Setting {
 		stmt.execute("CREATE TABLE `q1206`.`order` ("
 				+ "o_no INT PRIMARY KEY AUTO_INCREMENT,"
 				+ "o_id VARCHAR(10),"
-				+ "o_user VARCHAR(10)," //user 이름
 				+ "o_name VARCHAR(20)," //주문 이름
 				+ "o_price INT,"		//해당 주문 가격
 				+ "o_cnt INT"			//해당 주문 갯수
