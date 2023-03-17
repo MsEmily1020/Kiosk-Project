@@ -7,6 +7,7 @@ import controller.CommonFrame;
 public class Setting {
 	public static void main(String[] args) {
 		try {
+			CommonFrame.infoMsg("셋팅 성공");
 			setup();
 		} catch (Exception e) {
 			CommonFrame.errorMsg("셋팅 실패");
@@ -21,15 +22,9 @@ public class Setting {
 		var stmt = con.createStatement();
 
 		stmt.execute("SET GLOBAL local_infile = true;");
-
-		try {
-			stmt.execute("DROP DATABASE `q1206`");
-			System.out.println(";;q1206 제거");
-		} catch(Exception e) {
-			System.out.println("q1206 존재하지 않음");
-		}
-
+		stmt.execute("DROP SCHEMA IF EXISTS `q1206`");
 		stmt.execute("CREATE SCHEMA `q1206` DEFAULT CHARACTER SET utf8;");
+
 		System.out.println("q1206 DB 생성");
 
 		stmt.execute("CREATE TABLE `q1206`.`user` ("
@@ -45,16 +40,6 @@ public class Setting {
 		
 		System.out.println("user DB 생성");
 		
-		stmt.execute("CREATE TABLE `q1206`.`order` ("
-				+ "o_no INT PRIMARY KEY AUTO_INCREMENT,"
-				+ "o_id VARCHAR(10),"
-				+ "o_name VARCHAR(20)," //주문 이름
-				+ "o_price INT,"		//해당 주문 가격
-				+ "o_cnt INT"			//해당 주문 갯수
-				+ ")");
-
-		System.out.println("order DB 생성");
-		
 		stmt.execute("CREATE TABLE `q1206`.`manage` ("
 				+ "m_no INT PRIMARY KEY AUTO_INCREMENT,"
 				+ "m_id VARCHAR(10),"
@@ -64,6 +49,5 @@ public class Setting {
 				+ ")");
 		
 		System.out.println("manage DB 생성");
-		CommonFrame.infoMsg("셋팅 성공");
 	}
 }

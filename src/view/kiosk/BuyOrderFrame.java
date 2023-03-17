@@ -2,6 +2,7 @@ package view.kiosk;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -10,21 +11,27 @@ import javax.swing.JLabel;
 
 import controller.CommonFrame;
 import view.login.LoginFrame;
+import vo.MenuVO;
 
 public class BuyOrderFrame extends CommonFrame {
+	public static ArrayList<MenuVO> mvo = new ArrayList<>();
 	static int orderCnt;
 	public BuyOrderFrame() throws Exception {
 		super(600, 800, "주문창");
-
-		int sum = 0;
-		try(var rs = getResulSet("SELECT o_price, o_cnt\r\n"
-				+ "FROM `order`\r\n"
-				+ "WHERE o_id = ?", LoginFrame.id)) {
-
-			while(rs.next()) {
-				sum += rs.getInt(1) * rs.getInt(2);
-			}
+		
+		for(var m : mvo) {
+			updateSQL("INSERT INTO q1206.manage (m_id, m_name, m_price, m_cnt) "
+					+ "VALUES (?, ?, ?, ?)",
+					LoginFrame.id,
+					m.getName(),
+					m.getPrice(),
+					m.getCnt()
+					);
 		}
+		
+		int sum = 0;
+		for(var vo : mvo)
+			sum += vo.getPrice() * vo.getCnt();
 
 		JLabel lb1 = new JLabel("총 금액 : ");
 		lb1.setFont(new Font("HY견명조", Font.BOLD, 20));
@@ -80,7 +87,7 @@ public class BuyOrderFrame extends CommonFrame {
 
 		this.getContentPane().setBackground(Color.white);
 		
-		updateSQL("DELETE FROM `order` WHERE o_id = ?", LoginFrame.id);
+		KioskOrderFrame.mvo.clear();
 		
 		Timer time = new Timer();
 		TimerTask task = new TimerTask() {

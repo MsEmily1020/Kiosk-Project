@@ -30,7 +30,7 @@ public class CommonFrame extends JFrame {
 
 	public CommonFrame(int width, int height, String title) {
 		setIconImage(logo.getImage());
-		setLayout(null);
+		setLayout(null); 
 		setSize(width, height);
 		setTitle(title);
 		setLocationRelativeTo(null);
