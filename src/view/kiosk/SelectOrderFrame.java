@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,6 +14,8 @@ import javax.swing.JLabel;
 
 import controller.CommonFrame;
 import view.login.LoginFrame;
+import vo.MenuDAO;
+import vo.MenuVO;
 
 public class SelectOrderFrame extends CommonFrame implements ActionListener {
 	String price;
@@ -130,21 +133,9 @@ public class SelectOrderFrame extends CommonFrame implements ActionListener {
 	//추가하기
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		updateSQL("INSERT INTO q1206.manage (m_id, m_name, m_price, m_cnt) "
-				+ "VALUES (?, ?, ?, ?)",
-				LoginFrame.id,
-				menuName,
-				Integer.parseInt(price),
-				cnt
-				);
-		
-		updateSQL("INSERT INTO q1206.order (o_id, o_name, o_price, o_cnt) "
-				+ "VALUES (?, ?, ?, ?)",
-				LoginFrame.id,
-				menuName,
-				Integer.parseInt(price),
-				cnt
-				);
+		MenuVO vo = new MenuVO(LoginFrame.id, menuName, Integer.parseInt(price), cnt);
+		KioskOrderFrame.mvo.add(vo);
+
 		try {
 			AddMenuTool.createDB();
 		} catch (Exception e1) {

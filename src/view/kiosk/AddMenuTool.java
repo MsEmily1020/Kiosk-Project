@@ -34,8 +34,7 @@ public class AddMenuTool extends CommonFrame {
 					int state =	JOptionPane.showConfirmDialog(null, "정말로 삭제 하시겠습니까?", "행을 삭제하기", JOptionPane.YES_NO_OPTION);
 					if(state == JOptionPane.YES_OPTION) {
 						int row = table.getSelectedRow();
-						updateSQL("DELETE FROM `order` WHERE o_no = ?", model.getValueAt(row, 4));
-						updateSQL("DELETE FROM `manage` WHERE m_no = ?", model.getValueAt(row, 4));
+						KioskOrderFrame.mvo.remove(row);
 						model.removeRow(row);
 						try {
 							createDB();
@@ -62,21 +61,14 @@ public class AddMenuTool extends CommonFrame {
 	static public void createDB() throws Exception {
 		model.setRowCount(0);
 		
-		try(var rs = getResulSet("SELECT o_no, o_name, o_price, o_cnt\r\n"
-				+ "FROM `order`\r\n"
-				+ "WHERE o_id = ?", LoginFrame.id)) {
-
-			int id = 0;
-			
-			while(rs.next()) {
-				model.addRow(new Object[] {
-						++id,
-						rs.getString(2),
-						rs.getInt(3),
-						rs.getInt(4),
-						rs.getInt(1),
-				});
-			}
+		int id = 0;
+		for(var vo : KioskOrderFrame.mvo) {
+			model.addRow(new Object[] {
+					++id,
+					vo.getName(),
+					vo.getPrice(),
+					vo.getCnt(),
+			});
 		}
 	}
 }
