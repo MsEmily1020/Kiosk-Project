@@ -9,7 +9,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import controller.CommonFrame;
-import view.login.LoginFrame;
 
 public class AddMenuTool extends CommonFrame {
 	static DefaultTableModel model;
