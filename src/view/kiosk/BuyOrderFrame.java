@@ -87,8 +87,6 @@ public class BuyOrderFrame extends CommonFrame {
 
 		this.getContentPane().setBackground(Color.white);
 		
-		KioskOrderFrame.mvo.clear();
-		
 		Timer time = new Timer();
 		TimerTask task = new TimerTask() {
 			@Override

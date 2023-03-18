@@ -58,7 +58,7 @@ public class AddMenuTool extends CommonFrame {
 		createDB();
 	}
 	
-	static public void createDB() throws Exception {
+	public static void createDB() throws Exception {
 		model.setRowCount(0);
 		
 		int id = 0;

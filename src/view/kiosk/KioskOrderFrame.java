@@ -102,6 +102,7 @@ public class KioskOrderFrame extends CommonFrame implements ActionListener {
 				if(yesOrNo == JOptionPane.YES_OPTION) {
 					menu.dispose();
 					try {
+						mvo.clear();
 						new BuyOrderFrame().setVisible(true);
 					} catch (Exception e1) {
 						e1.printStackTrace();
