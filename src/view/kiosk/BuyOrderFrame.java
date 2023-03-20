@@ -11,13 +11,17 @@ import javax.swing.JLabel;
 
 import controller.CommonFrame;
 import view.login.LoginFrame;
+import vo.MenuDAO;
 import vo.MenuVO;
 
 public class BuyOrderFrame extends CommonFrame {
-	public static ArrayList<MenuVO> mvo = new ArrayList<>();
+	public static MenuDAO dao = new MenuDAO();
+	ArrayList<MenuVO> mvo = new ArrayList<>();
 	static int orderCnt;
 	public BuyOrderFrame() throws Exception {
 		super(600, 800, "주문창");
+		
+		this.mvo = dao.select();
 		
 		for(var m : mvo) {
 			updateSQL("INSERT INTO q1206.manage (m_id, m_name, m_price, m_cnt) "
@@ -86,6 +90,8 @@ public class BuyOrderFrame extends CommonFrame {
 		this.add(this.setBounds(cardLb, 40, 320, card.getIconWidth(), card.getIconHeight()));
 
 		this.getContentPane().setBackground(Color.white);
+		
+		dao.deleteAll();
 		
 		Timer time = new Timer();
 		TimerTask task = new TimerTask() {

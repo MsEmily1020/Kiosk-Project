@@ -15,7 +15,7 @@ public class AddMenuTool extends CommonFrame {
 	
 	public AddMenuTool() throws Exception {
 		super(410, 400, "주문정보");
-		this.setLocation(500, 500);
+		this.setLocationByPlatform(true);
 
 		model = new DefaultTableModel("번호,주문명,가격,수량,db번호".split(","), 0) {
 			public boolean isCellEditable(int row, int column) {
@@ -33,7 +33,7 @@ public class AddMenuTool extends CommonFrame {
 					int state =	JOptionPane.showConfirmDialog(null, "정말로 삭제 하시겠습니까?", "행을 삭제하기", JOptionPane.YES_NO_OPTION);
 					if(state == JOptionPane.YES_OPTION) {
 						int row = table.getSelectedRow();
-						KioskOrderFrame.mvo.remove(row);
+						BuyOrderFrame.dao.delete(row);
 						model.removeRow(row);
 						try {
 							createDB();
@@ -61,7 +61,7 @@ public class AddMenuTool extends CommonFrame {
 		model.setRowCount(0);
 		
 		int id = 0;
-		for(var vo : KioskOrderFrame.mvo) {
+		for(var vo : BuyOrderFrame.dao.select()) {
 			model.addRow(new Object[] {
 					++id,
 					vo.getName(),

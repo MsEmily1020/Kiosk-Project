@@ -131,7 +131,7 @@ public class SelectOrderFrame extends CommonFrame implements ActionListener {
 	//추가하기
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		KioskOrderFrame.mvo.add(new MenuVO(LoginFrame.id, menuName, Integer.parseInt(price), cnt));
+		BuyOrderFrame.dao.insert(new MenuVO(LoginFrame.id, menuName, Integer.parseInt(price), cnt));
 		try {
 			AddMenuTool.createDB();
 		} catch (Exception e1) {

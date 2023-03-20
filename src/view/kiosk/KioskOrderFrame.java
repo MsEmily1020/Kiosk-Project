@@ -23,7 +23,6 @@ import view.login.LoginFrame;
 import vo.MenuVO;
 
 public class KioskOrderFrame extends CommonFrame implements ActionListener {
-	public static ArrayList<MenuVO> mvo = new ArrayList<>();
 	JPanel menuPn = new JPanel(new GridLayout());
 	JScrollPane scroll = new JScrollPane(menuPn, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 	JButton[] menu;
@@ -96,13 +95,11 @@ public class KioskOrderFrame extends CommonFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				menu.setLocationRelativeTo(null);
-				BuyOrderFrame.mvo = mvo;
 				dispose();
 				int yesOrNo = JOptionPane.showConfirmDialog(null, "주문버튼을 클릭하셨습니다.", "이대로 주문하시겠습니까?", JOptionPane.YES_NO_OPTION);
 				if(yesOrNo == JOptionPane.YES_OPTION) {
 					menu.dispose();
 					try {
-						mvo.clear();
 						new BuyOrderFrame().setVisible(true);
 					} catch (Exception e1) {
 						e1.printStackTrace();
@@ -126,7 +123,7 @@ public class KioskOrderFrame extends CommonFrame implements ActionListener {
 				int state =	JOptionPane.showConfirmDialog(null, "주문 내용은 모두 삭제됩니다.", "주문을 취소합니다.", JOptionPane.YES_NO_OPTION);
 				if(state == JOptionPane.YES_OPTION) {
 					menu.dispose();
-					mvo.clear();
+					BuyOrderFrame.dao.deleteAll();
 					dispose();
 					new LoginFrame().setVisible(true);
 				}
