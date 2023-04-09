@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 
 import controller.CommonFrame;
 import view.kiosk.KioskOrderFrame;
+import view.manage.ManageFrame;
 
 public class LoginFrame extends CommonFrame implements ActionListener {
 	JTextField[] tf = new JTextField[2];
@@ -49,7 +50,13 @@ public class LoginFrame extends CommonFrame implements ActionListener {
 
 		//관리자 로그인
 		bt[1].addActionListener(e -> {
-			this.dispose();
+			if(tf[0].getText().equals("admin") && tf[1].getText().equals("1234")) {
+				this.dispose();
+				new ManageFrame().setVisible(true);
+			}
+			else {
+				errorMsg("아이디 또는 비밀번호를 다시 확인해주세요.");
+			}
 		});
 
 		img.setIcon(logo);
