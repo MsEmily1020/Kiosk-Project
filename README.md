@@ -34,3 +34,7 @@
 https://user-images.githubusercontent.com/121646949/230749172-83db86c4-7613-455d-a629-af3777d523b4.mp4
 
 
+  ## 🎞 키오스크 - 관리
+
+https://user-images.githubusercontent.com/121646949/230766295-2474cc6c-9b72-4d9f-aa8f-508cef7c5218.mp4
+  
