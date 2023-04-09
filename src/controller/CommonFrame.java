@@ -37,7 +37,7 @@ public class CommonFrame extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
-	public JComponent setBounds(JComponent comp, int x, int y, int width, int height) {
+	public static JComponent setBounds(JComponent comp, int x, int y, int width, int height) {
 		comp.setBounds(x, y, width, height);
 		comp.setFont(new Font("한컴 말랑말랑 Bold", Font.BOLD, 15));
 		return comp;
